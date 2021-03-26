@@ -1,0 +1,15 @@
+.resultPage{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result{
+    width: 50%;
+}
+
+.result Button{
+    margin: 20px;
+}

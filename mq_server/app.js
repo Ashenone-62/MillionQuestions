@@ -31,9 +31,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.get("/api/getQuestions/",async (req,res) => {
-  let pageIndex = req.query.pageIndex ? req.query.pageIndex : 0
-
-  let getQuestions_str = `select * from questions limit ${[pageIndex * 10]},10`;
+  let getQuestions_str ="select * from questions order by rand() limit 10";
   let getQuestions_res = await sqlQuery(getQuestions_str)
 
   res.json(getQuestions_res)

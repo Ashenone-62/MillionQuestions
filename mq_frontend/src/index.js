@@ -1,24 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from 'antd-mobile';
-import axios from 'axios'
-import './index.css';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import store from './store/index'
+import App from './views/App'
+import SolveQuestions from './views/SolveQuestions'
+import Result from './views/Result'
+import './static/css/index.css'
 
-class App extends React.Component {
-  async componentWillMount(){
-    let getQuestions = await axios.get('http://localhost:3000/api/getQuestions/')
-    console.log(getQuestions.data)
-  }
-
-  render(){
-    return (
-      <Button type="primary">primary</Button>
-    )
-  }
-}
 
 ReactDOM.render(
-    <App />,
+  <Provider store={store}>
+    <Router>
+      <Route path="/" exact component={App} />
+      <Route path="/SolveQuestions" exact component={SolveQuestions} />
+      <Route path="/Result" exact component={Result} />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
