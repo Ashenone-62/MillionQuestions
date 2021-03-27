@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import loadingGif from '../static/img/loading.gif';
-import '../static/css/solveQuestions.css'
+import '../static/css/solveQuestions.css';
+import { ADD_SCORE, SET_QUESTION_LIST } from '../store/actionType'
 
 
 function mapStateToProps(state){
@@ -15,13 +16,13 @@ function mapDispatchToProps(dispatch){
             let list = await axios.get('http://localhost:3000/api/getQuestions/');
             list = list.data;
             dispatch({
-                type: "setQuestionList",
+                type: SET_QUESTION_LIST,
                 content: list
             })
         },
         addScore: () =>{
             dispatch({
-                type: "addScore",
+                type: ADD_SCORE,
                 content: 10
             })
         }
@@ -136,7 +137,7 @@ class solveQuestionsCom extends React.Component {
             )
         }else{
             return (
-                <div>
+                <div className="solveQuestions">
                      <img src={loadingGif} alt="loading" />
                 </div>
             )

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'antd-mobile';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { INIT_SCORE } from '../store/actionType'
 
 function mapStateToProps(state){
     return {...state}
@@ -10,7 +11,7 @@ function mapDispatchToProps(dispatch){
     return {
       initScore: () => {
           dispatch({
-            type: "initScore",
+            type: INIT_SCORE,
             content: 0
           })
       }
@@ -29,7 +30,7 @@ class AppCom extends React.Component {
     return (
         <div className="appPage">
               <div className="app">
-                  <Button type="primary" onClick={ this.goSolveQuestions } >随即答题</Button>
+                  <Button type="primary" onClick={ this.goSolveQuestions } >马上答题</Button>
               </div>
         </div>
     )
