@@ -5,9 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sqlQuery = require('./public/javascripts/SQL.js');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
 
 // view engine setup
@@ -20,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//配置跨域
 app.use((req,res,next)=>{
   res.append('Access-Control-Allow-Origin' ,'*');
   res.append('Access-Control-Allow-Content-Type' ,'*');
@@ -27,13 +25,14 @@ app.use((req,res,next)=>{
   next()
 })
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
+//获取问题接口
 app.get("/api/getQuestions/",async (req,res) => {
-  let getQuestions_str ="select * from questions order by rand() limit 10";
+
+  //随机获取10条记录
+  let getQuestions_str ="select answer,options,quiz from questions order by rand() limit 10";
   let getQuestions_res = await sqlQuery(getQuestions_str)
 
+  //返回给前端
   res.json(getQuestions_res)
 })
 

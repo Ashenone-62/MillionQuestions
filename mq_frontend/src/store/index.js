@@ -1,21 +1,7 @@
 import {createStore} from 'redux'
-import state from './state'
-import mutations from './mutations'
+import REDUCER from './actions'
 
-let data = state
-let mutation = mutations;
-
-function reducer(state=data,action){
-    if(action.type.indexOf('redux') === -1){
-        state = mutation[action.type](state,action)
-
-        return {...state}
-    }else{
-
-        return state
-    }
-}
-
-const store = createStore(reducer)
+//通过reducer创建一个store
+const store = createStore(REDUCER)
 
 export default store
